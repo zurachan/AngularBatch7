@@ -9,24 +9,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PositionComponent } from './position/position.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserComponent } from './user/user.component';
-import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 @NgModule({
-  declarations: [						
+  declarations: [
     AppComponent,
     SidebarComponent,
-      NavbarComponent,
-      FooterComponent,
-      UserComponent,
-      DepartmentComponent,
-      PositionComponent,
-      BreadcrumbComponent
-   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    NavbarComponent,
+    FooterComponent,
+    UserComponent,
+    DepartmentComponent,
+    PositionComponent,
   ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
