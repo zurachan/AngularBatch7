@@ -1,3 +1,4 @@
 export const environment = {
-    endPoint:"abcdxyz"
+  production: true,
+  baseUrl: 'abcdxyz',
 };

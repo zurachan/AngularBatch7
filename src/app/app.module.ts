@@ -9,6 +9,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { PositionComponent } from './position/position.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserComponent } from './user/user.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,8 +20,15 @@ import { UserComponent } from './user/user.component';
     UserComponent,
     DepartmentComponent,
     PositionComponent,
+    UserDetailComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

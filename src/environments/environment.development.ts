@@ -1,3 +1,5 @@
 export const environment = {
-    endPoint:"abcdxyz-dev"
+  production: false,
+//   baseUrl: 'https://localhost:44322/api/',
+  baseUrl: 'https://reqres.in/api/',
 };

@@ -1,0 +1,60 @@
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">User Detail</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active">User v1</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.content-header -->
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <!-- Small boxes (Stat box) -->
+      <h1>User Detail page</h1>
+
+      <form [formGroup]="form" (submit)="onSave()">
+        <div class="mb-3">
+          <label for="firstName">FirstName</label>
+          <input id="firstName" type="text" class="form-control" formControlName="first_name">
+          <span class="textError"
+            *ngIf="form.controls['first_name'].touched && form.controls['first_name'].hasError('required')">
+            First name không được bỏ trống
+          </span>
+          <span class="textError"
+            *ngIf="form.controls['first_name'].touched && form.controls['first_name'].hasError('maxlength')">
+            First name không được quá 10 ký tự
+          </span>
+        </div>
+        <div class="mb-3">
+          <label for="lastName">LastName</label>
+          <input id="lastName" type="text" class="form-control" formControlName="last_name">
+        </div>
+        <div class="mb-3">
+          <label for="email">Email</label>
+          <input id="email" type="text" class="form-control" formControlName="email">
+        </div>
+        <div class="mb-3">
+          <label for="avatar">Avatar</label>
+          <input id="avatar" type="file" class="form-control" formControlName="avatar"
+            (change)="onUploadCoverImage($event)">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Lưu</button>
+      </form>
+
+      <!-- /.row (main row) -->
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>

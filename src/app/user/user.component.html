@@ -9,7 +9,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a (click)="returnHome()">Home</a></li>
-            <li class="breadcrumb-item active">User  v1</li>
+            <li class="breadcrumb-item active">User v1</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -23,20 +23,28 @@
       <!-- Small boxes (Stat box) -->
       <h1>User page</h1>
 
-      <table>
+      <table class="table table-bordered">
         <thead>
           <tr>
             <td>Id</td>
-            <td>Name</td>
+            <td>First Name</td>
+            <td>Last Name</td>
+            <td>Email</td>
+            <td>Action</td>
           </tr>
         </thead>
 
         <tbody>
           <tr *ngFor="let item of user">
-            <ng-container *ngIf="!item.isDeleted">
-              <td>{{item.id}}</td>
-              <td>{{item.name}}</td>
-            </ng-container>
+            <td>{{item.id}}</td>
+            <td>{{item.first_name}}</td>
+            <td>{{item.last_name}}</td>
+            <td>{{item.email}}</td>
+            <td>
+              <button class="btn btn-primary" (click)="onClickSua(item)">Sửa trang mới</button>
+              <button class="btn btn-warning ml-2" (click)="onClickSuaPopup()">Sửa popup</button>
+              <button class="btn btn-danger ml-2" (click)="onDelete()">Xoá</button>
+            </td>
           </tr>
         </tbody>
       </table>

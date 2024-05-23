@@ -1,5 +1,7 @@
 export class User {
   id: number | undefined;
-  name: string | undefined;
-  isDeleted: boolean | false | undefined;
+  first_name: string | undefined;
+  last_name: string | undefined;
+  email: string | undefined;
+  avatar: string | undefined;
 }
