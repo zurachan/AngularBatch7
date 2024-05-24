@@ -1,16 +1,16 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DepartmentComponent } from './department/department.component';
-import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
-import { PositionComponent } from './position/position.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
-import { UserComponent } from './user/user.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FooterComponent } from './layout/footer/footer.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
+import { DepartmentComponent } from './pages/department/department.component';
+import { PositionComponent } from './pages/position/position.component';
+import { UserDetailComponent } from './pages/user-detail/user-detail.component';
+import { UserComponent } from './pages/user/user.component';
 @NgModule({
   declarations: [
     AppComponent,
