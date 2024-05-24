@@ -4,12 +4,13 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0">User Detail</h1>
+          <h1 class="m-0">User</h1>
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item active">User v1</li>
+            <li class="breadcrumb-item"><a [routerLink]="['/user']">User</a></li>
+            <li class="breadcrumb-item active">User detail</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -21,38 +22,53 @@
   <section class="content">
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
-      <h1>User Detail page</h1>
+      <h1>User detail view</h1>
 
       <form [formGroup]="form" (submit)="onSave()">
         <div class="mb-3">
           <label for="firstName">FirstName</label>
           <input id="firstName" type="text" class="form-control" formControlName="first_name">
-          <span class="textError"
+          <span class="text-danger"
             *ngIf="form.controls['first_name'].touched && form.controls['first_name'].hasError('required')">
             First name không được bỏ trống
           </span>
-          <span class="textError"
+          <span class="text-danger"
             *ngIf="form.controls['first_name'].touched && form.controls['first_name'].hasError('maxlength')">
-            First name không được quá 10 ký tự
+            First name không được quá 20 ký tự
           </span>
         </div>
         <div class="mb-3">
           <label for="lastName">LastName</label>
           <input id="lastName" type="text" class="form-control" formControlName="last_name">
+          <span class="text-danger"
+            *ngIf="form.controls['last_name'].touched && form.controls['last_name'].hasError('required')">
+            Last name không được bỏ trống
+          </span>
+          <span class="text-danger"
+            *ngIf="form.controls['last_name'].touched && form.controls['last_name'].hasError('maxlength')">
+            Last name không được quá 20 ký tự
+          </span>
         </div>
         <div class="mb-3">
           <label for="email">Email</label>
           <input id="email" type="text" class="form-control" formControlName="email">
+          <span class="text-danger"
+            *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')">
+            Email không được bỏ trống
+          </span>
+          <span class="text-danger"
+            *ngIf="form.controls['email'].touched && form.controls['email'].hasError('maxlength')">
+            Email name không được quá 100 ký tự
+          </span>
         </div>
         <div class="mb-3">
           <label for="avatar">Avatar</label>
           <input id="avatar" type="file" class="form-control" formControlName="avatar"
             (change)="onUploadCoverImage($event)">
         </div>
-
-        <button type="submit" class="btn btn-primary">Lưu</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!form.touched || !form.valid">Lưu</button>
+        <a [routerLink]="['/user']" class="btn btn-warning ml-2">Back</a>
       </form>
-
       <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->
   </section>

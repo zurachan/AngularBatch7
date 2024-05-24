@@ -1,20 +1,20 @@
-import { Response } from './Response';
+import { ApiResponse } from './ApiResponse';
 
-export class PaginationResponse<T> extends Response<T> {
-  Paging!: Pagination;
-  override Data!: T;
-  override Success!: boolean;
-  override Message!: string;
+export class PaginationResponse<T> extends ApiResponse<T> {
+  paging!: Pagination;
+  override data!: T;
+  override success!: boolean;
+  override message!: string;
 }
 
 export class Pagination {
-  CurrentRecords!: number;
-  FirstPage!: number;
-  LastPage!: number;
-  TotalPages!: number;
-  TotalRecords!: number;
-  NextPage!: number;
-  PreviousPage!: number;
-  PageSize!: number;
-  PageNumber!: number;
+  currentRecords!: number;
+  firstPage!: number;
+  lastPage!: number;
+  totalPages!: number;
+  totalRecords!: number;
+  nextPage!: number;
+  previousPage!: number;
+  pageSize!: number;
+  pageNumber!: number;
 }

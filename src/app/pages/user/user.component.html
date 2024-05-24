@@ -8,8 +8,8 @@
         </div><!-- /.col -->
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a (click)="returnHome()">Home</a></li>
-            <li class="breadcrumb-item active">User v1</li>
+            <li class="breadcrumb-item"><a>Home</a></li>
+            <li class="breadcrumb-item active">User</li>
           </ol>
         </div><!-- /.col -->
       </div><!-- /.row -->
@@ -21,7 +21,7 @@
   <section class="content">
     <div class="container-fluid">
       <!-- Small boxes (Stat box) -->
-      <h1>User page</h1>
+      <h1>User list view</h1>
 
       <table class="table table-bordered">
         <thead>
@@ -30,12 +30,18 @@
             <td>First Name</td>
             <td>Last Name</td>
             <td>Email</td>
-            <td>Action</td>
+            <td class="d-flex justify-content-between">
+              <span>Action</span>
+              <div>
+                <button class="btn btn-success" (click)="onClickSua()">Thêm trang mới</button>
+                <button class="btn btn-success ml-2" (click)="onClickSuaPopup()">Thêm popup</button>
+              </div>
+            </td>
           </tr>
         </thead>
 
         <tbody>
-          <tr *ngFor="let item of user">
+          <tr *ngFor="let item of paginationRes.data">
             <td>{{item.id}}</td>
             <td>{{item.first_name}}</td>
             <td>{{item.last_name}}</td>
@@ -43,7 +49,7 @@
             <td>
               <button class="btn btn-primary" (click)="onClickSua(item)">Sửa trang mới</button>
               <button class="btn btn-warning ml-2" (click)="onClickSuaPopup()">Sửa popup</button>
-              <button class="btn btn-danger ml-2" (click)="onDelete()">Xoá</button>
+              <button class="btn btn-danger ml-2" (click)="onDelete(item)">Xoá</button>
             </td>
           </tr>
         </tbody>

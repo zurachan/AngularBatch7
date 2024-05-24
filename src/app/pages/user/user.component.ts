@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { User } from '../../model/User';
 import { Router } from '@angular/router';
+import { PaginationResponse } from 'src/app/model/Pagination';
+import { User } from '../../model/User';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-user',
@@ -10,22 +11,29 @@ import { Router } from '@angular/router';
 })
 export class UserComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
-  user: User[] = [];
+  paginationRes = new PaginationResponse<User[]>();
+  searchParam = {
+    pageNumber: 1,
+    pageSize: 5,
+    User: '',
+  };
   ngOnInit() {
     this.getUser();
   }
-
-  returnHome() {
-    alert('dang ve nha');
-  }
   getUser() {
-    this.userService.getUser().subscribe((res) => {
-      this.user = res.data;
+    this.userService.getUsers(this.searchParam).subscribe((res) => {
+      this.paginationRes = res;
     });
   }
-  onClickSua(item: User) {
-    this.router.navigateByUrl('user/' + item.id);
+  onClickSua(item?: User) {
+    if (item) this.router.navigateByUrl('user/' + item.id);
+    else this.router.navigateByUrl('user/' + 0);
   }
   onClickSuaPopup() {}
-  onDelete() {}
+  onDelete(item: User) {
+    if (item)
+      this.userService.deleteUser(item.id).subscribe((res) => {
+        this.getUser();
+      });
+  }
 }
