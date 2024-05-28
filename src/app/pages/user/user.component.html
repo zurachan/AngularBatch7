@@ -1,61 +1,66 @@
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1 class="m-0">User</h1>
-        </div><!-- /.col -->
+        </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a>Home</a></li>
             <li class="breadcrumb-item active">User</li>
           </ol>
-        </div><!-- /.col -->
-      </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- /.content-header -->
 
-  <!-- Main content -->
   <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) -->
-      <h1>User list view</h1>
-
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <td>Id</td>
-            <td>First Name</td>
-            <td>Last Name</td>
-            <td>Email</td>
-            <td class="d-flex justify-content-between">
-              <span>Action</span>
-              <div>
-                <button class="btn btn-success" (click)="onClickSua()">Thêm trang mới</button>
-                <button class="btn btn-success ml-2" (click)="onClickSuaPopup()">Thêm popup</button>
-              </div>
-            </td>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let item of paginationRes.data">
-            <td>{{item.id}}</td>
-            <td>{{item.first_name}}</td>
-            <td>{{item.last_name}}</td>
-            <td>{{item.email}}</td>
-            <td>
-              <button class="btn btn-primary" (click)="onClickSua(item)">Sửa trang mới</button>
-              <button class="btn btn-warning ml-2" (click)="onClickSuaPopup()">Sửa popup</button>
-              <button class="btn btn-danger ml-2" (click)="onDelete(item)">Xoá</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- /.row (main row) -->
-    </div><!-- /.container-fluid -->
+      <div class="card">
+        <div class="card-header">
+          User grid
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <td>Id</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Email</td>
+                <td class="d-flex justify-content-center">
+                  <div>
+                    <button class="btn btn-success" (click)="onClickSua()">Thêm trang mới</button>
+                    <button class="btn btn-success ml-2" (click)="onClickSuaPopup('Thêm nhân viên')">Thêm
+                      popup</button>
+                  </div>
+                </td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of paginationRes.data">
+                <td>{{item.id}}</td>
+                <td>{{item.first_name}}</td>
+                <td>{{item.last_name}}</td>
+                <td>{{item.email}}</td>
+                <td class="d-flex justify-content-center">
+                  <button class="btn btn-primary" (click)="onClickSua(item)">Sửa trang mới</button>
+                  <button class="btn btn-warning ml-2" (click)="onClickSuaPopup('Sửa nhân viên', item)">Sửa
+                    popup</button>
+                  <button class="btn btn-danger ml-2" (click)="onDelete(item)">Xoá</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer clearfix">
+          <!-- <app-pagination [paging]="paginationRes.paging" (pageChangeEvent)="pageChange($event)"></app-pagination> -->
+        </div>
+      </div>
+    </div>
   </section>
-  <!-- /.content -->
+
+  <ng-template #modal></ng-template>
+
 </div>

@@ -1,0 +1,62 @@
+<div class="modal fade show" style="padding-right: 15px; display: block;">
+  <div class="modal-dialog modal-dialog-centered">
+    <form [formGroup]="form" style="width: 100%;" (submit)="onSave()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">{{modal.title}} Nhân viên</h4>
+          <button type="button" class="close" (click)="onClose()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="firstName">FirstName</label>
+            <input id="firstName" type="text" class="form-control" formControlName="first_name">
+            <span class="text-danger"
+              *ngIf="form.controls['first_name'].touched && form.controls['first_name'].hasError('required')">
+              First name không được bỏ trống
+            </span>
+            <span class="text-danger"
+              *ngIf="form.controls['first_name'].touched && form.controls['first_name'].hasError('maxlength')">
+              First name không được quá 20 ký tự
+            </span>
+          </div>
+          <div class="mb-3">
+            <label for="lastName">LastName</label>
+            <input id="lastName" type="text" class="form-control" formControlName="last_name">
+            <span class="text-danger"
+              *ngIf="form.controls['last_name'].touched && form.controls['last_name'].hasError('required')">
+              Last name không được bỏ trống
+            </span>
+            <span class="text-danger"
+              *ngIf="form.controls['last_name'].touched && form.controls['last_name'].hasError('maxlength')">
+              Last name không được quá 20 ký tự
+            </span>
+          </div>
+          <div class="mb-3">
+            <label for="email">Email</label>
+            <input id="email" type="text" class="form-control" formControlName="email">
+            <span class="text-danger"
+              *ngIf="form.controls['email'].touched && form.controls['email'].hasError('required')">
+              Email không được bỏ trống
+            </span>
+            <span class="text-danger"
+              *ngIf="form.controls['email'].touched && form.controls['email'].hasError('maxlength')">
+              Email name không được quá 100 ký tự
+            </span>
+          </div>
+          <div class="mb-3">
+            <label for="avatar">Avatar</label>
+            <input id="avatar" type="file" class="form-control" formControlName="avatar"
+              (change)="onUploadCoverImage($event)">
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" (click)="onClose()">Đóng</button>
+          <button type="submit" class="btn btn-primary">Lưu</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="modal-backdrop fade show"></div>

@@ -1,0 +1,29 @@
+<div class="d-flex align-items-center justify-content-end">
+  <!-- <div *ngIf="paging.totalRecords < 1 && paging.currentRecords < 1; else paginate">
+    Không có kết quả
+  </div>
+  <ng-template #paginate>
+    <div></div> -->
+  <ul class="pagination pagination-sm m-0 float-right">
+    <li *ngIf="paging.totalPages > 1 && paging.previousPage != null" class="page-item cursor-poiter">
+      <a class="page-link" (click)="pageChange(paging.firstPage, paging.pageSize)">&laquo;</a>
+    </li>
+
+    <li *ngIf="paging.previousPage != null" class="page-item cursor-poiter">
+      <a class="page-link" (click)="pageChange(paging.previousPage, paging.pageSize)">{{paging.previousPage}}</a>
+    </li>
+
+    <li class="page-item active cursor-poiter">
+      <a class="page-link">{{paging.pageNumber}}</a>
+    </li>
+
+    <li *ngIf="paging.nextPage != null" class="page-item cursor-poiter">
+      <a class="page-link" (click)="pageChange(paging.nextPage, paging.pageSize)">{{paging.nextPage}}</a>
+    </li>
+
+    <li *ngIf="paging.totalPages > 1 && paging.nextPage != null" class="page-item cursor-poiter">
+      <a class="page-link" (click)="pageChange(paging.lastPage, paging.pageSize)">&raquo;</a>
+    </li>
+  </ul>
+  <!-- </ng-template> -->
+</div>

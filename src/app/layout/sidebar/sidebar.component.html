@@ -21,40 +21,23 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-
-        <li class="nav-item">
+        <li class="nav-item" *ngFor="let item of menu">
           <a href="#" class="nav-link">
             <i class="nav-icon far fa-envelope"></i>
             <p>
-              QUẢN LÝ CHUNG
+              {{item.title}}
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a [routerLink]="['/user']" class="nav-link">
+            <li class="nav-item" *ngFor="let child of item.children">
+              <a routerLink="{{item.path}}/{{child.path}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Nhân viên</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/department']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Phòng ban</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/position']" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Chức vị</p>
+                <p>{{child.title}}</p>
               </a>
             </li>
           </ul>
         </li>
-
-
 
       </ul>
     </nav>

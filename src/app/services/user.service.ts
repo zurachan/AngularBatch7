@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ApiResponse } from '../model/ApiResponse';
 import { PaginationResponse } from '../model/Pagination';
@@ -13,6 +13,12 @@ const endPoint = 'User';
 })
 export class UserService {
   constructor(private http: HttpClient) {}
+
+  private _close$ = new Subject();
+  public close$ = this._close$.asObservable();
+  close(reason?: any) {
+    this._close$.next(reason);
+  }
 
   getUsers(searchParam: any): Observable<PaginationResponse<User[]>> {
     return this.http.post<PaginationResponse<User[]>>(

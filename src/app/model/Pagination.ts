@@ -8,11 +8,11 @@ export class PaginationResponse<T> extends ApiResponse<T> {
 }
 
 export class Pagination {
-  currentRecords!: number;
   firstPage!: number;
   lastPage!: number;
   totalPages!: number;
   totalRecords!: number;
+  currentRecords!: number;
   nextPage!: number;
   previousPage!: number;
   pageSize!: number;
