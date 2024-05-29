@@ -6,6 +6,7 @@ import {
   SimpleChanges,
   ViewChild,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -26,9 +27,10 @@ export class ModalComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    debugger;
     this.container.clear();
+    console.log(this.container);
     this.componentRef = this.container.createComponent(this.formComp);
+    // this.componentRef = this.vcr.createComponent(this.formComp);
     this.componentRef.setInput('data', this.data);
     this.componentRef.changeDetectorRef.detectChanges();
   }

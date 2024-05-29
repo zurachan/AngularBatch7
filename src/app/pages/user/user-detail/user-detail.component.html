@@ -9,7 +9,7 @@
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a>Home</a></li>
-            <li class="breadcrumb-item"><a [routerLink]="['/user']">User</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/management/user']">User</a></li>
             <li class="breadcrumb-item active">User detail</li>
           </ol>
         </div><!-- /.col -->
@@ -67,7 +67,7 @@
             (change)="onUploadCoverImage($event)">
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="!form.touched || !form.valid">Lưu</button>
-        <a [routerLink]="['/user']" class="btn btn-warning ml-2">Back</a>
+        <a [routerLink]="['/management/user']" class="btn btn-warning ml-2">Back</a>
       </form>
       <!-- /.row (main row) -->
     </div><!-- /.container-fluid -->

@@ -6,12 +6,12 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaginationResponse } from 'src/app/model/Pagination';
+import { Pagination } from 'src/app/model/Pagination';
+import { Breadcrumb } from 'src/app/model/Breadcrumb';
+import { CommonService } from 'src/app/services/common.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../model/User';
-import { UserPopupComponent } from '../user-popup/user-popup.component';
-import { CommonService } from 'src/app/services/common.service';
-import { UserModalComponent } from '../user-modal/user-modal.component';
+import { UserPopupComponent } from './user-popup/user-popup.component';
 
 @Component({
   selector: 'app-user',
@@ -21,18 +21,36 @@ import { UserModalComponent } from '../user-modal/user-modal.component';
 export class UserComponent implements OnInit {
   @ViewChild('container', { read: ViewContainerRef, static: true })
   componentRef: ComponentRef<UserPopupComponent>;
-  paginationRes = new PaginationResponse<User[]>();
+  datasource: User[] = [];
+  paging = new Pagination();
   searchParam = {
     pageNumber: 1,
     pageSize: 5,
     User: '',
   };
+  breadcrumb = new Breadcrumb();
+
   constructor(
     private userService: UserService,
     private router: Router,
     private container: ViewContainerRef,
     private commonService: CommonService
-  ) {}
+  ) {
+    this.breadcrumb.title = 'User';
+    this.breadcrumb.path = '/management/user';
+    this.breadcrumb.breadcrumb = [
+      {
+        title: 'Home',
+        path: '/',
+        breadcrumb: [],
+      },
+      {
+        title: 'User',
+        path: '/management/user',
+        breadcrumb: [],
+      },
+    ];
+  }
 
   ngOnInit() {
     this.getUser();
@@ -46,27 +64,43 @@ export class UserComponent implements OnInit {
   }
   getUser() {
     this.userService.getUsers(this.searchParam).subscribe((res) => {
-      this.paginationRes = res;
+      this.paging = res.paging;
+
+      this.paging.recordStart =
+        this.paging.currentRecords < 1
+          ? 0
+          : (this.paging.pageNumber - 1) * this.paging.pageSize + 1;
+      this.paging.recordEnd =
+        this.paging.currentRecords < 1
+          ? 0
+          : this.paging.recordStart + this.paging.currentRecords - 1;
+
+      let start = this.paging.recordStart;
+      res.data.map((x: any) => {
+        x.stt = start++;
+        return x;
+      });
+
+      this.datasource = res.data;
     });
   }
-
   pageChange(value: any) {
-    console.log(value);
+    this.searchParam.pageNumber = value.number;
+    this.searchParam.pageSize = value.size;
+    this.getUser();
   }
-
   onClickSua(item?: User) {
     if (item) this.router.navigateByUrl('management/user/' + item.id);
     else this.router.navigateByUrl('management/user/' + 0);
   }
   onClickSuaPopup(title: string, item?: User) {
-    // this.renderModal({ title: title, item: item });
-    this.commonService.openModal(
-      UserModalComponent,
-      { title: title, item: item },
-      true
-    );
+    this.renderModal({ title: title, item: item });
+    // this.commonService.openModal(
+    //   UserModalComponent,
+    //   { title: title, item: item },
+    //   true
+    // );
   }
-
   renderModal(data: any) {
     this.container.clear();
     this.componentRef = this.container.createComponent(UserPopupComponent);

@@ -15,18 +15,6 @@ import {
 } from '@angular/core';
 import { Pagination } from 'src/app/model/Pagination';
 
-interface Page {
-  firstPage: number;
-  lastPage: number;
-  totalPages: number;
-  totalRecords: number;
-  currentRecords: number;
-  nextPage: number;
-  previousPage: number;
-  pageSize: number;
-  pageNumber: number;
-}
-
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
@@ -44,25 +32,18 @@ export class PaginationComponent
 {
   constructor(private cdr: ChangeDetectorRef) {}
 
-  @Input() paging!: Pagination;
+  @Input() paging: Pagination;
   @Output() pageChangeEvent = new EventEmitter<any>();
   ngOnChanges(changes: SimpleChanges): void {}
   ngOnInit() {}
-  ngDoCheck(): void {
-    console.log('DoCheck');
-    console.log(this.paging);
-  }
+  ngDoCheck(): void {}
   ngAfterContentInit(): void {}
   ngAfterContentChecked(): void {
-    console.log('after content checked');
-    console.log(this.paging);
     this.cdr.detectChanges();
   }
-  ngAfterViewInit(): void {
-    console.log('after view init');
-  }
+  ngAfterViewInit(): void {}
   ngAfterViewChecked(): void {
-    console.log('after view checked');
+    this.cdr.detectChanges();
   }
 
   pageChange(number?: number, size?: number) {
