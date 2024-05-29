@@ -21,24 +21,26 @@
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-        <li class="nav-item" *ngFor="let item of menu">
-          <a href="javascript:void(0)" class="nav-link">
-            <i class="nav-icon far fa-envelope"></i>
-            <p>
-              {{item.title}}
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item" *ngFor="let child of item.children">
-              <a routerLink="{{item.path}}/{{child.path}}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>{{child.title}}</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
+        <ng-container *ngFor="let item of menu">
+          <li class="nav-item" [ngClass]="getClass(item)  ? 'menu-is-opening menu-open' : ''">
+            <a href="javascript:void(0)" class="nav-link" [ngClass]="getClass(item)  ? 'active' : ''">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                {{item.title}}
+                <!-- <i class="fas fa-angle-left right"></i> -->
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item" *ngFor="let child of item.children">
+                <a routerLink="{{item.path}}/{{child.path}}" class="nav-link"
+                  [ngClass]="getClass(child)  ? 'active' : ''">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>{{child.title}}</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

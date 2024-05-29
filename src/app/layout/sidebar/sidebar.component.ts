@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import {
+  AfterContentChecked,
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'],
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit, AfterContentChecked {
   menu = [
     {
       path: 'management',
@@ -25,4 +31,24 @@ export class SidebarComponent {
       ],
     },
   ];
+
+  current = [];
+
+  constructor(private router: Router, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.current = event.url.split('/').filter(Boolean);
+        console.log(this.current);
+      }
+    });
+  }
+  ngAfterContentChecked(): void {
+    this.cdr.detectChanges();
+  }
+
+  getClass(item: any): boolean {
+    return this.current.some((x) => x == item.path);
+  }
 }
