@@ -6,9 +6,8 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { Pagination } from 'src/app/model/Pagination';
 import { Breadcrumb } from 'src/app/model/Breadcrumb';
-import { CommonService } from 'src/app/services/common.service';
+import { Pagination } from 'src/app/model/Pagination';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../model/User';
 import { UserPopupComponent } from './user-popup/user-popup.component';
@@ -33,8 +32,7 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private container: ViewContainerRef,
-    private commonService: CommonService
+    private container: ViewContainerRef
   ) {
     this.breadcrumb.title = 'User';
     this.breadcrumb.path = '/management/user';
@@ -63,26 +61,28 @@ export class UserComponent implements OnInit {
     });
   }
   getUser() {
-    this.userService.getUsers(this.searchParam).subscribe((res) => {
-      this.paging = res.paging;
+    this.userService
+      .getPageData(this.searchParam, '/search')
+      .subscribe((res) => {
+        this.paging = res.paging;
 
-      this.paging.recordStart =
-        this.paging.currentRecords < 1
-          ? 0
-          : (this.paging.pageNumber - 1) * this.paging.pageSize + 1;
-      this.paging.recordEnd =
-        this.paging.currentRecords < 1
-          ? 0
-          : this.paging.recordStart + this.paging.currentRecords - 1;
+        this.paging.recordStart =
+          this.paging.currentRecords < 1
+            ? 0
+            : (this.paging.pageNumber - 1) * this.paging.pageSize + 1;
+        this.paging.recordEnd =
+          this.paging.currentRecords < 1
+            ? 0
+            : this.paging.recordStart + this.paging.currentRecords - 1;
 
-      let start = this.paging.recordStart;
-      res.data.map((x: any) => {
-        x.stt = start++;
-        return x;
+        let start = this.paging.recordStart;
+        res.data.map((x: any) => {
+          x.stt = start++;
+          return x;
+        });
+
+        this.datasource = res.data;
       });
-
-      this.datasource = res.data;
-    });
   }
   pageChange(value: any) {
     this.searchParam.pageNumber = value.number;
@@ -95,11 +95,6 @@ export class UserComponent implements OnInit {
   }
   onClickSuaPopup(title: string, item?: User) {
     this.renderModal({ title: title, item: item });
-    // this.commonService.openModal(
-    //   UserModalComponent,
-    //   { title: title, item: item },
-    //   true
-    // );
   }
   renderModal(data: any) {
     this.container.clear();
@@ -109,7 +104,7 @@ export class UserComponent implements OnInit {
   }
   onDelete(item: User) {
     if (item)
-      this.userService.deleteUser(item.id).subscribe((res) => {
+      this.userService.delete(item.id).subscribe((res) => {
         this.getUser();
       });
   }

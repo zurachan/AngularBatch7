@@ -46,11 +46,11 @@ export class UserPopupComponent implements OnInit, OnChanges {
   onSave() {
     let userForm = this.form.getRawValue();
     if (userForm.id) {
-      this.userService.updateUser(userForm).subscribe((res) => {
+      this.userService.update(userForm.id, userForm).subscribe((res) => {
         this.onClose(true);
       });
     } else {
-      this.userService.createUser(userForm).subscribe((res) => {
+      this.userService.create(userForm).subscribe((res) => {
         this.onClose(true);
       });
     }

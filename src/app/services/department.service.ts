@@ -1,10 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
+import { ServicePath } from '../core/decorator/service.decorator';
+import { BaseService } from '../core/service/base.service';
+import { Department } from '../model/Department';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class DepartmentService {
-
-constructor() { }
-
+@ServicePath('Department')
+export class DepartmentService extends BaseService<Department> {
+  constructor(injector: Injector) {
+    super(injector);
+  }
 }

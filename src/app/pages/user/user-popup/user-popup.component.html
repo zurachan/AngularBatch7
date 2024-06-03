@@ -53,7 +53,7 @@
         </div>
         <div class="modal-footer justify-content-between">
           <button type="button" class="btn btn-default" (click)="onClose()">Đóng</button>
-          <button type="submit" class="btn btn-primary">Lưu</button>
+          <button type="submit" class="btn btn-primary" [disabled]="!form.valid || form.pristine">Lưu</button>
         </div>
       </div>
     </form>

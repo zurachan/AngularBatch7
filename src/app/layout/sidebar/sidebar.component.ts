@@ -40,7 +40,6 @@ export class SidebarComponent implements OnInit, AfterContentChecked {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.current = event.url.split('/').filter(Boolean);
-        console.log(this.current);
       }
     });
   }
