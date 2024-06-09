@@ -13,13 +13,13 @@ import { PaginationModule } from './layout/pagination/pagination.module';
 import { PreloaderComponent } from './layout/preloader/preloader.component';
 import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { DepartmentComponent } from './pages/department/department.component';
+import { ErrorComponent } from './pages/error/error.component';
+import { HomeComponent } from './pages/home/home.component';
 import { PositionComponent } from './pages/position/position.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { UserDetailComponent } from './pages/user/user-detail/user-detail.component';
 import { UserPopupComponent } from './pages/user/user-popup/user-popup.component';
 import { UserComponent } from './pages/user/user.component';
-import { HomeComponent } from './pages/home/home.component';
-import { ErrorComponent } from './pages/error/error.component';
-import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [

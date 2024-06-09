@@ -3,7 +3,7 @@ import {
   ComponentRef,
   OnInit,
   ViewChild,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Breadcrumb } from 'src/app/model/Breadcrumb';
@@ -28,6 +28,8 @@ export class UserComponent implements OnInit {
     User: '',
   };
   breadcrumb = new Breadcrumb();
+  receivedMessage: string;
+  baseUrl = 'https://localhost:44382/api/';
 
   constructor(
     private userService: UserService,
@@ -52,6 +54,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
+
     this.userService.close$.subscribe((reason) => {
       this.container.clear();
       if (this.componentRef) {
