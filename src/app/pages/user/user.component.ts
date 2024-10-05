@@ -3,7 +3,7 @@ import {
   ComponentRef,
   OnInit,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Breadcrumb } from 'src/app/model/Breadcrumb';
